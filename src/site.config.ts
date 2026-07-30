@@ -48,6 +48,10 @@ export const menuLinks: { path: string; title: string }[] = [
 		path: "/notes/",
 		title: "Notes",
 	},
+	{
+		path: "https://operas.pt/CV.pdf",
+		title: "CV",
+	},
 ];
 
 // https://expressive-code.com/reference/configuration/
