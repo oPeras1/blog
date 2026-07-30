@@ -1,5 +1,6 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
 import PostPreview from "@/components/blog/PostPreview.astro";
 import PostSidebar from "@/components/blog/PostSidebar.astro";
 import Note from "@/components/note/Note.astro";
@@ -57,7 +58,16 @@ const latestNotes = allNotes
 				)
 			}
 			<section class="mt-16">
-				<h2 class="title text-accent mb-6 text-xl"><a href="/posts/">Posts</a></h2>
+				<!-- Posts heading with RSS icon -->
+				<div class="flex items-center gap-3 mb-6">
+					<h2 class="title text-accent text-xl">
+						<a href="/posts/">Posts</a>
+					</h2>
+					<a class="text-accent hover:text-link transition-colors" href="/rss.xml" target="_blank" rel="noopener noreferrer">
+						<span class="sr-only">RSS feed for posts</span>
+						<Icon aria-hidden="true" class="h-5 w-5" focusable="false" name="mdi:rss" />
+					</a>
+				</div>
 				<ul class="space-y-4" role="list">
 					{
 						latestPosts.map((p) => (
@@ -71,9 +81,16 @@ const latestNotes = allNotes
 			{
 				latestNotes.length > 0 && (
 					<section class="mt-16">
-						<h2 class="title text-accent mb-6 text-xl">
-							<a href="/notes/">Notes</a>
-						</h2>
+						<!-- Notes heading with RSS icon -->
+						<div class="flex items-center gap-3 mb-6">
+							<h2 class="title text-accent text-xl">
+								<a href="/notes/">Notes</a>
+							</h2>
+							<a class="text-accent hover:text-link transition-colors" href="/notes/rss.xml" target="_blank" rel="noopener noreferrer">
+								<span class="sr-only">RSS feed for notes</span>
+								<Icon aria-hidden="true" class="h-5 w-5" focusable="false" name="mdi:rss" />
+							</a>
+						</div>
 						<ul class="space-y-6" role="list">
 							{latestNotes.map((note) => (
 								<li>

@@ -6,6 +6,7 @@ tags: ["security", "vulnerability-disclosure", "api"]
 coverImage:
   src: "continente.jpg"
   alt: "Screenshot of the memory game"
+readingTime: 4
 ---
 
 Just like a lot of people in Portugal, I have the Cartão Continente app on my phone. It's the loyalty app for Continente, one of the country's biggest supermarket chains, part of the Sonae group. Back in April 2025, they were running a limited-time campaign with a little memory-matching minigame bolted onto the app: match the tiles, win some extra points, redeem them for discounts. Harmless stuff.

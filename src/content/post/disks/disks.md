@@ -6,6 +6,7 @@ tags: ["homelab", "storage", "server"]
 coverImage:
   src: "main.jpg"
   alt: "Extra disks sitting on top of the server case"
+readingTime: 3
 ---
 
 <!-- photo: overview shot of the full setup — server, external PSU, disks on top -->

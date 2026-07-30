@@ -6,6 +6,7 @@ tags: ["gpon", "hardware", "networking", "homelab"]
 coverImage:
   src: "setup.jpg"
   alt: "USB to TTL adapter wired into the GPON stick's molex connector"
+readingTime: 5
 ---
 
 This post comes before the one about [replacing my ISP router](/posts/router/router), chronologically. Before I could plug anything into OPNsense, I first had to get a GPON stick into a state where it would actually boot and talk to my ISP's network. That part did not go smoothly.

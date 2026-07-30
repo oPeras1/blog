@@ -49,7 +49,7 @@ const { as: Tag = "div", post, withDesc = false } = Astro.props;
 				dateTimeOptions={{ month: "short", day: "numeric", year: "numeric" }}
 			/>
 			<span class="text-muted/30">•</span>
-			<span>{post.data.readingTime || "3 min read"}</span>
+			<span>{post.data.readingTime + " min read" || "3 min read"}</span>
 		</div>
 
 		{/* Description */}

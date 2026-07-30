@@ -6,6 +6,7 @@ tags: ["homelab", "hardware", "ilo", "hp"]
 coverImage:
   src: "temps.png"
   alt: "iLO web interface showing server health information"
+readingTime: 5
 ---
 
 TL;DR: server fans are loud. That's normal, they're built to run hot and overloaded without dying. I am not planning to run some giant AI model on mine, so there was no real reason for the fans to sit at full blast all the time. Worse, they'd ramp up hard the moment I added anything that wasn't official HP gear: extra disks, a SAS card, a GPU, whatever. HP's own firmware doesn't give you a way to just tell the fans to calm down. So I patched it. (Actually, someone else patched it, I just followed their instructions.)

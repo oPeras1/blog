@@ -6,6 +6,7 @@ tags: ["networking", "opnsense", "gpon", "homelab"]
 coverImage:
   src: "gpon-stick-fiber.jpg"
   alt: "OPNsense dashboard showing the WAN interface online"
+readingTime: 5
 ---
 
 I won't name my ISP here, for reasons that should be obvious. That said, in Portugal there are really only 4 main ISPs offering fiber, so if you're curious enough to try this yourself, it shouldn't take much searching to figure out which one this post is about, and whether the same approach applies to it.

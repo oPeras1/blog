@@ -6,6 +6,7 @@ tags: ["networking", "homelab", "proxmox", "hardware"]
 coverImage:
   src: "freedos.png"
   alt: "FreeDOS"
+readingTime: 5
 ---
 
 In my [last post](/posts/router/router) about ditching my ISP router and running my own GPON stick straight into my server, I mentioned I had to force the link down to 1Gbps because my NIC didn't support auto-negotiation between speeds. I said I'd come back to it once I actually got 2.5Gbps working. This is that post.
