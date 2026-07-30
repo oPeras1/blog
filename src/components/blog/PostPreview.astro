@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import type { HTMLTag, Polymorphic } from "astro/types";
 import FormattedDate from "@/components/FormattedDate.astro";
@@ -11,11 +12,81 @@ type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 const { as: Tag = "div", post, withDesc = false } = Astro.props;
 ---
 
-<FormattedDate class="text-muted min-w-30 font-semibold" date={post.data.publishDate} />
-<Tag>
-	{post.data.draft && <span class="text-red-500">(Draft) </span>}
-	<a class="cactus-link" href={`/posts/${post.id}/`}>
-		{post.data.title}
-	</a>
-</Tag>
-{withDesc && <q class="line-clamp-3 italic">{post.data.description}</q>}
+<article class="group bg-global-bg hover:bg-muted/5 rounded-xl border border-muted/10 hover:border-muted/30 p-6 transition-all duration-200 hover:shadow-md hover:shadow-muted/5">
+	<div class="flex flex-col gap-2">
+		{/* Tags above title */}
+		{post.data.tags && post.data.tags.length > 0 && (
+			<div class="flex flex-wrap gap-1.5 mb-1">
+				{post.data.tags.slice(0, 3).map((tag) => (
+					<a
+						href={`/tags/${tag}/`}
+						class="text-[10px] uppercase tracking-wider bg-accent/10 text-accent hover:bg-accent/20 px-2.5 py-0.5 rounded-full font-medium transition-colors"
+					>
+						{tag}
+					</a>
+				))}
+				{post.data.tags.length > 3 && (
+					<span class="text-[10px] uppercase text-muted">+{post.data.tags.length - 3}</span>
+				)}
+			</div>
+		)}
+
+		{/* Title */}
+		<Tag>
+			<a
+				class="text-accent-2 hover:text-link text-2xl font-bold leading-tight transition-colors"
+				href={`/posts/${post.id}/`}
+			>
+				{post.data.draft && <span class="text-red-500 mr-2 text-lg">(Draft)</span>}
+				{post.data.title}
+			</a>
+		</Tag>
+
+		{/* Date & reading time */}
+		<div class="flex items-center gap-3 text-sm text-muted">
+			<FormattedDate
+				date={post.data.publishDate}
+				dateTimeOptions={{ month: "short", day: "numeric", year: "numeric" }}
+			/>
+			<span class="text-muted/30">•</span>
+			<span>{post.data.readingTime || "3 min read"}</span>
+		</div>
+
+		{/* Description */}
+		{withDesc && post.data.description && (
+			<p class="text-muted text-base leading-relaxed mt-1 line-clamp-3">
+				{post.data.description}
+			</p>
+		)}
+
+		{/* Cover image */}
+		{post.data.coverImage && (
+			<div class="my-3 w-full overflow-hidden rounded-lg">
+				<Image
+					src={post.data.coverImage.src}
+					alt={post.data.coverImage.alt || post.data.title}
+					layout="full-width"
+					loading="lazy"
+					decoding="async"
+					class="transition-transform duration-300 group-hover:scale-[1.02]"
+				/>
+			</div>
+		)}
+
+		{/* Read more */}
+		{withDesc && (
+			<div class="mt-3 flex items-center justify-between">
+				<a
+					href={`/posts/${post.id}/`}
+					class="text-link hover:text-accent inline-flex items-center gap-1.5 text-sm font-medium transition-colors group/link"
+				>
+					Read more
+					<span class="inline-block transition-transform duration-200 group-hover/link:translate-x-1" aria-hidden="true">→</span>
+				</a>
+				{post.data.updatedDate && (
+					<span class="text-xs text-muted/60">Updated {new Date(post.data.updatedDate).toLocaleDateString()}</span>
+				)}
+			</div>
+		)}
+	</div>
+</article>

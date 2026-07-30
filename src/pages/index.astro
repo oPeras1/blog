@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
 import PostPreview from "@/components/blog/PostPreview.astro";
+import PostSidebar from "@/components/blog/PostSidebar.astro";
 import Note from "@/components/note/Note.astro";
 import SocialList from "@/components/SocialList.astro";
 import { getAllPosts } from "@/data/post";
@@ -29,57 +30,62 @@ const latestNotes = allNotes
 	.slice(0, MAX_NOTES) as CollectionEntry<"note">[];
 ---
 
-<PageLayout meta={{ title: "Home" }}>
-	<section>
-		<h1 class="title mb-12">Hello World!</h1>
-		<p class="mb-4">
-			Hi, I’m Hugo.
-			This is my personal blog, where I share small projects, notes, and experiments I work on in my free time. Most of what you’ll find here will be related to my home lab setups, cybersecurity explorations, and other technical things I’m tinkering with outside of my studies and daily work.
-			Expect a mix of practical experiments, breakdowns of what I’m building, things I break (and fix), and general curiosity-driven learning.
-			This site is mainly a space for me to document what I’m doing and keep track of my progress over time, but if you find something useful or interesting, even better.
-		</p>
-		<SocialList />
-	</section>
-	{
-		pinnedPosts.length > 0 && (
-			<section class="mt-16">
-				<h2 class="title mb-6 text-xl">Pinned Posts</h2>
-				<ul class="space-y-4" role="list">
-					{pinnedPosts.map((p) => (
-						<li class="grid gap-1 sm:grid-cols-[auto_1fr]">
-							<PostPreview post={p} />
-						</li>
-					))}
-				</ul>
+<PageLayout meta={{ title: "Home" }} wide>
+	<div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-center">
+		<div class="min-w-0 lg:max-w-4xl">
+			<section>
+				<h1 class="title mb-12">Hello World!</h1>
+				<p class="mb-4">
+					Hi, I'm Hugo. I'm a CS student at <a href="https://tecnico.ulisboa.pt/">IST</a> and team lead of a fellowship group at <a href="https://equipa.dei.tecnico.ulisboa.pt">DEI</a>.
+					<br />
+					This is my personal blog. Home lab setups, cybersecurity experiments, and other things I tinker with in my free time. Mostly here to document my progress, but glad if it's useful to you too.
+				</p>
+				<SocialList />
 			</section>
-		)
-	}
-	<section class="mt-16">
-		<h2 class="title text-accent mb-6 text-xl"><a href="/posts/">Posts</a></h2>
-		<ul class="space-y-4" role="list">
 			{
-				latestPosts.map((p) => (
-					<li class="grid gap-1 sm:grid-cols-[auto_1fr]">
-						<PostPreview post={p} />
-					</li>
-				))
+				pinnedPosts.length > 0 && (
+					<section class="mt-16">
+						<h2 class="title mb-6 text-xl">Pinned Posts</h2>
+						<ul class="space-y-4" role="list">
+							{pinnedPosts.map((p) => (
+								<li class="grid gap-1 sm:grid-cols-[auto_1fr]">
+									<PostPreview post={p} />
+								</li>
+							))}
+						</ul>
+					</section>
+				)
 			}
-		</ul>
-	</section>
-	{
-		latestNotes.length > 0 && (
 			<section class="mt-16">
-				<h2 class="title text-accent mb-6 text-xl">
-					<a href="/notes/">Notes</a>
-				</h2>
-				<ul class="space-y-6" role="list">
-					{latestNotes.map((note) => (
-						<li>
-							<Note note={note} as="h3" isPreview />
-						</li>
-					))}
+				<h2 class="title text-accent mb-6 text-xl"><a href="/posts/">Posts</a></h2>
+				<ul class="space-y-4" role="list">
+					{
+						latestPosts.map((p) => (
+							<li class="grid gap-1 sm:grid-cols-[auto_1fr]">
+								<PostPreview post={p} withDesc={true} />
+							</li>
+						))
+					}
 				</ul>
 			</section>
-		)
-	}
+			{
+				latestNotes.length > 0 && (
+					<section class="mt-16">
+						<h2 class="title text-accent mb-6 text-xl">
+							<a href="/notes/">Notes</a>
+						</h2>
+						<ul class="space-y-6" role="list">
+							{latestNotes.map((note) => (
+								<li>
+									<Note note={note} as="h3" isPreview />
+								</li>
+							))}
+						</ul>
+					</section>
+				)
+			}
+		</div>
+
+		<PostSidebar posts={allPostsByDate} title="Recent Posts" maxItems={10} />
+	</div>
 </PageLayout>

@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "@/components/FormattedDate.astro";
+
+interface Props {
+	posts: CollectionEntry<"post">[];
+	title?: string;
+	maxItems?: number;
+}
+
+const { posts, title = "Recent Posts", maxItems = 10 } = Astro.props;
+const recentPosts = posts.slice(0, maxItems);
+---
+
+<aside class="lg:sticky lg:top-12 lg:w-64 lg:shrink-0 lg:self-start">
+	<details open>
+		<summary class="title hover:marker:text-accent cursor-pointer text-lg">
+			{title}
+		</summary>
+		<nav class="ms-4 mt-4">
+			<ol class="space-y-3">
+				{recentPosts.map((post) => (
+					<li>
+						<a href={`/posts/${post.id}/`} class="group block hover:text-accent transition-colors">
+							<span class="block text-sm font-medium leading-tight group-hover:underline">
+								{post.data.title}
+							</span>
+							<span class="mt-0.5 block text-xs text-muted">
+								<FormattedDate
+									date={post.data.publishDate}
+									dateTimeOptions={{ month: "short", day: "numeric", year: "numeric" }}
+								/>
+							</span>
+						</a>
+					</li>
+				))}
+			</ol>
+		</nav>
+	</details>
+</aside>
