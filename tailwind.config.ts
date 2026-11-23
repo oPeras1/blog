@@ -19,9 +19,18 @@ export default {
 						blockquote: {
 							borderLeftWidth: "0",
 						},
-						code: {
-							border: "1px dotted #666",
-							borderRadius: "2px",
+						":not(pre) > code": {
+							backgroundColor: "color-mix(in oklab, var(--color-global-text) 8%, transparent)",
+							borderRadius: "0.25rem",
+							padding: "0.125em 0.35em",
+							boxDecorationBreak: "clone",
+							overflowWrap: "anywhere",
+						},
+						"code::before": {
+							content: "none",
+						},
+						"code::after": {
+							content: "none",
 						},
 						kbd: {
 							"&:where([data-theme='dark'], [data-theme='dark'] *)": {
